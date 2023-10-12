@@ -11,10 +11,11 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-import { styles } from './styles';
+import { colorBackgroundImage, styles } from './styles';
 import towerBackground from '../../assets/home-background.png';
 import { Header } from '../../components/Header';
 import { FindInput } from '../../components/FindInput';
+import { SiteCard } from '../../components/SiteCard';
 
 function Findsites() {
   const insets = useSafeAreaInsets();
@@ -31,6 +32,7 @@ function Findsites() {
             flex: 1,
             padding: 24,
             paddingTop: insets.top + 20,
+            backgroundColor: colorBackgroundImage,
           }}
           imageStyle={styles.image}
         >
@@ -46,7 +48,10 @@ function Findsites() {
 
             <FindInput />
           </View>
-          <View style={styles.footer} />
+
+          <View style={styles.footer}>
+            <SiteCard />
+          </View>
         </ImageBackground>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
