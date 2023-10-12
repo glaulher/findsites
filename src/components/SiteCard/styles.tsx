@@ -5,42 +5,57 @@ import theme from '../../theme';
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
-
-    borderRadius: 5,
+    width: '100%',
+    borderRadius: 7,
     paddingVertical: 17,
     paddingHorizontal: 24,
   },
 
   title: {
-    fontFamily: theme.FONTS.TEXT,
-    fontSize: 14,
-    backgroundColor: '#fcfbfb',
+    fontFamily: theme.FONTS.TITLE,
+    fontSize: 16,
+    backgroundColor: '#FFFFFF',
+    color: theme.COLORS.TITLE,
   },
 
-  site: {
+  address: {
+    paddingTop: 4,
     fontFamily: theme.FONTS.TEXT,
-    fontSize: 20,
+    fontSize: 14,
+    color: theme.COLORS.DESCRIPTION,
   },
 
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    marginTop: 19,
+    marginTop: 16,
   },
 
-  category: {
+  coordinates: {
     flexDirection: 'row',
     alignItems: 'center',
   },
 
-  categoryName: {
+  latitude: {
+    paddingLeft: 4,
     fontSize: 14,
     color: '#969CB2',
   },
 
-  date: {
+  longitude: {
     fontSize: 14,
     color: '#969CB2',
+  },
+  cardWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  addressWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 4,
   },
 });

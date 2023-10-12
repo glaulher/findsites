@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   viewInput: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: theme.COLORS.BACKGROUND,
+    // backgroundColor: theme.COLORS.BACKGROUND,
     borderWidth: 1,
     borderColor: theme.COLORS.TITLE,
     height: 50,
