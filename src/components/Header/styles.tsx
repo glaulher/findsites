@@ -3,7 +3,6 @@ import theme from '../../theme';
 
 export const styles = StyleSheet.create({
   header: {
-    height: 100,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   },
 
   main: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'flex-start',
   },
 
@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
   },
 
   footer: {
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 40,
@@ -94,3 +95,5 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 5,
   },
 });
+
+export const colorBackgroundImage = theme.COLORS.BACKGROUND;
