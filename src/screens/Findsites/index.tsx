@@ -42,7 +42,7 @@ function Findsites() {
             <View>
               <Text style={styles.title}>Bem vindo.</Text>
               <Text style={styles.description}>
-                Insira o Id do site para localizar o endereço.
+                Insira o Id do site{'\n'}para localizar o endereço.
               </Text>
             </View>
 
