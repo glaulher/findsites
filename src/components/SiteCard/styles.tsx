@@ -4,17 +4,18 @@ import theme from '../../theme';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.COLORS.CARD_BACKGROUND,
     width: '100%',
     borderRadius: 7,
     paddingVertical: 17,
     paddingHorizontal: 24,
+    marginBottom: 16,
   },
 
   title: {
     fontFamily: theme.FONTS.TITLE,
     fontSize: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.COLORS.CARD_BACKGROUND,
     color: theme.COLORS.TITLE,
   },
 
@@ -24,10 +25,18 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.COLORS.DESCRIPTION,
   },
+  city: {
+    paddingTop: 4,
+  },
+  text: {
+    fontFamily: theme.FONTS.TEXT,
+    fontSize: 14,
+    color: theme.COLORS.DESCRIPTION,
+  },
 
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 16,
   },
@@ -40,22 +49,19 @@ export const styles = StyleSheet.create({
   latitude: {
     paddingLeft: 4,
     fontSize: 14,
-    color: '#969CB2',
+    color: theme.COLORS.TEXT_CARD,
   },
 
   longitude: {
+    paddingLeft: 4,
     fontSize: 14,
-    color: '#969CB2',
+    color: theme.COLORS.TEXT_CARD,
   },
   cardWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  addressWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 4,
-  },
 });
+
+export const iconMap = theme.COLORS.GO;

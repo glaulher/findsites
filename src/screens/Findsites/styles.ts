@@ -1,20 +1,19 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import theme from '../../theme';
 
 export const styles = StyleSheet.create({
   container: {},
-
-  header: {
-    height: 100,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  backgroundImage: {
+    flex: 1,
+  },
+  image: {
+    width: 500,
+    height: 500,
   },
 
-  main: {
-    // flex: 1,
-    justifyContent: 'flex-start',
+  text: {
+    paddingBottom: 16,
   },
 
   title: {
@@ -34,65 +33,14 @@ export const styles = StyleSheet.create({
     lineHeight: 24,
   },
 
-  footer: {
-    // flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 40,
+  list: {
+    marginTop: 16,
   },
 
-  // top: {
-  //   marginBottom: 40,
-  // },
-
-  // select: {},
-
-  // button: {
-  //   backgroundColor: '#bd93f9',
-  //   height: 160,
-  //   flexDirection: 'row',
-  //   borderRadius: 10,
-  //   overflow: 'hidden',
-  //   alignItems: 'center',
-  //   marginTop: 8,
-  //   width: 160,
-  // },
-
-  // buttonIcon: {
-  //   height: 160,
-  //   width: 160,
-  //   backgroundColor: 'rgba(0, 0, 0, 0.1)',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  // },
-
-  image: {
-    width: 500,
-    height: 500,
-  },
-
-  input: {
-    flex: 1,
-    color: theme.COLORS.TEXTCOLOR,
-    fontSize: 18,
-    paddingHorizontal: Platform.OS === 'ios' ? 15 : 11,
-  },
-  viewInput: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.COLORS.BACKGROUND,
-    borderWidth: 1,
-    borderColor: theme.COLORS.TITLE,
-    height: 50,
-    borderRadius: 7,
-    marginTop: 30,
-  },
-  magnifier: {
-    paddingHorizontal: Platform.OS === 'ios' ? 15 : 11,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderTopRightRadius: 5,
-    borderBottomRightRadius: 5,
+  goIcon: {
+    padding: 10,
+    backgroundColor: theme.COLORS.ICONCOLOR_LIGHT,
+    borderRadius: 32,
   },
 });
 

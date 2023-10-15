@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import theme from '../../theme';
 
 export const styles = StyleSheet.create({
   header: {
@@ -7,10 +6,5 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  about: {
-    //  alignItems: 'flex-end',
-    // paddingTop: 32,
-  },
+  about: {},
 });
-
-export const iconColor = theme.COLORS.ICONCOLOR;

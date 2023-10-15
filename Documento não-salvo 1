@@ -1,0 +1,166 @@
+import React, { useEffect, useState } from 'react';
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  ImageBackground,
+  Text,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
+  Linking,
+  Alert,
+  FlatList,
+} from 'react-native';
+
+import { RectButton } from 'react-native-gesture-handler';
+import { colorBackgroundImage, styles } from './styles';
+import towerBackground from '../../assets/home-background.png';
+import { Header } from '../../components/Header';
+import { FindInput } from '../../components/FindInput';
+import { SiteCard } from '../../components/SiteCard';
+import address from '../../services/address.json';
+import ButtonOpacity from '../../components/ButtonOpacity';
+import {
+  iconColorInfo,
+  iconColorSearch,
+  iconMap,
+} from '../../components/ButtonOpacity/styles';
+
+function Findsites() {
+  const insets = useSafeAreaInsets();
+
+  const [searchName, setSearchName] = useState('');
+  const [addresses, setAddresses] = useState<
+    {
+      ID: number;
+      Nome: string;
+      latitude: string;
+      longitude: string;
+      cluster_geo?: string;
+      regional: string;
+      estado: string;
+      municipio: string;
+      Endereco: string;
+      TipoInfra?: string;
+      TipoSiteRf?: string;
+    }[]
+  >([]);
+  // const [addresses, setAddresses] = useState({});
+  const searchSite = async () => {
+    const findSite = address.find(site => site.Nome === searchName);
+
+    const coordinates = `${findSite?.latitude}, ${findSite?.longitude}`;
+
+    if (!findSite) {
+      Alert.alert('Oops...', `Site ${searchName} não encontrado!`);
+      return setSearchName('');
+    }
+
+    //  setAddresses([]);
+
+    setAddresses([...addresses, JSON.parse(JSON.stringify(findSite))]);
+
+    // navigateToMaps(coordinates);
+
+    return { findSite, coordinates };
+  };
+
+  // const coordinates = '-22.8056,-43.0031';
+  // eslint-disable-next-line no-shadow
+  const navigateToMaps = (coordinates: string) => {
+    return Platform.OS === 'ios'
+      ? Linking.openURL(`maps://?q=${coordinates}`)
+      : Linking.openURL(`google.navigation:q=${coordinates}`);
+  };
+
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        <View
+          style={{
+            flex: 1,
+            padding: 24,
+            paddingTop: insets.top + 20,
+            paddingBottom: insets.bottom + 20,
+            backgroundColor: colorBackgroundImage,
+          }}
+        >
+          <ImageBackground source={towerBackground} imageStyle={styles.image}>
+            <Header>
+              <ButtonOpacity
+                onPress={() =>
+                  Alert.alert(
+                    'Sobre',
+                    `Desenvolvido por Glaulher Medeiros. ${'\n'}Contato: glaulher.developer@gmail.com`,
+                  )
+                }
+                iconName="info"
+                iconSize={32}
+                iconColor={iconColorInfo}
+              />
+            </Header>
+
+            <View style={styles.main}>
+              <View>
+                <Text style={styles.title}>Bem vindo.</Text>
+                <Text style={styles.description}>
+                  Insira o Id do site{'\n'}para localizar o endereço.
+                </Text>
+              </View>
+
+              <FindInput
+                value={searchName}
+                onChangeText={setSearchName}
+                //  value={search}
+                onSubmitEditing={async () => {
+                  searchSite();
+                }}
+              >
+                <ButtonOpacity
+                  onPress={() => Alert.alert('Id do site', searchName)}
+                  iconName="search"
+                  iconSize={24}
+                  iconColor={iconColorSearch}
+                />
+              </FindInput>
+            </View>
+
+            <View style={styles.footer}>
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                data={addresses}
+                keyExtractor={item => item.ID.toString()}
+                renderItem={({ item }) => (
+                  <SiteCard
+                    site={item.Nome}
+                    address={item.Endereco}
+                    city={item.municipio}
+                    region={item.regional}
+                    latitude={item.latitude}
+                    longitude={item.longitude}
+                  >
+                    <ButtonOpacity
+                      onPress={() => Alert.alert('Endereço', item.Endereco)}
+                      iconColor={iconMap}
+                      iconSize={32}
+                      style={styles.goIcon}
+                      iconName="chevron-right"
+                    />
+                  </SiteCard>
+                )}
+              />
+            </View>
+          </ImageBackground>
+        </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
+  );
+}
+
+export default Findsites;
+
