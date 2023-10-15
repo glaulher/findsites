@@ -14,20 +14,20 @@ import {
   FlatList,
 } from 'react-native';
 
-import towerBackground from '../../assets/home-background.png';
-import { Header } from '../../components/Header';
-import { FindInput } from '../../components/FindInput';
-import { SiteCard } from '../../components/SiteCard';
-import ButtonOpacity from '../../components/ButtonOpacity';
+import towerBackground from '@assets/home-background.png';
 
-import { colorBackgroundImage, styles } from './styles';
+import { Header } from '@components/Header';
+import { FindInput } from '@components/FindInput';
+import { SiteCard } from '@components/SiteCard';
+import ButtonOpacity from '@components/ButtonOpacity';
 import {
   iconColorInfo,
   iconColorSearch,
   iconMap,
-} from '../../components/ButtonOpacity/styles';
+} from '@components/ButtonOpacity/styles';
 
-import address from '../../services/address.json';
+import address from '@services/address.json';
+import { colorBackgroundImage, styles } from './styles';
 
 function Findsites() {
   const insets = useSafeAreaInsets();
@@ -50,22 +50,39 @@ function Findsites() {
   >([]);
 
   const searchSite = async () => {
-    const findSite = address.find(site => site.Nome === searchName);
+    try {
+      const findSite = address.find(site => site.Nome === searchName);
 
-    if (!findSite) {
-      Alert.alert('Oops...', `Site ${searchName} não encontrado!`);
+      if (!findSite) {
+        Alert.alert('Oops...', `Site ${searchName} não encontrado!`);
+        return setSearchName('');
+      }
+      setAddresses([JSON.parse(JSON.stringify(findSite))]);
       return setSearchName('');
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Erro durante a pesquisa:', error);
+      return Alert.alert(
+        'Erro',
+        'Ocorreu um erro durante a pesquisa. Por favor, tente novamente.',
+      );
     }
-    setAddresses([JSON.parse(JSON.stringify(findSite))]);
-    return setSearchName('');
   };
 
   const navigateToMaps = (coordinates: string) => {
     setAddresses([]);
-
-    return Platform.OS === 'ios'
-      ? Linking.openURL(`maps://?q=${coordinates}`)
-      : Linking.openURL(`google.navigation:q=${coordinates}`);
+    try {
+      return Platform.OS === 'ios'
+        ? Linking.openURL(`maps://?q=${coordinates}`)
+        : Linking.openURL(`google.navigation:q=${coordinates}`);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Erro ao abrir o mapa:', error);
+      return Alert.alert(
+        'Erro',
+        'Não foi possível abrir o mapa. Por favor, verifique suas configurações de mapa e tente novamente.',
+      );
+    }
   };
 
   return (
@@ -96,9 +113,9 @@ function Findsites() {
                     `Desenvolvido por Glaulher Medeiros. ${'\n'}Contato: glaulher.developer@gmail.com`,
                   )
                 }
-                iconName="info"
-                iconSize={32}
-                iconColor={iconColorInfo}
+                name="info"
+                size={32}
+                color={iconColorInfo}
               />
             </Header>
             <View style={styles.text}>
@@ -109,9 +126,9 @@ function Findsites() {
             </View>
 
             <FindInput
+              testID="search-input"
               value={searchName}
               onChangeText={setSearchName}
-              //  value={search}
               onSubmitEditing={async () => {
                 searchSite();
               }}
@@ -121,9 +138,9 @@ function Findsites() {
                   searchSite();
                 }}
                 onPressIn={Keyboard.dismiss}
-                iconName="search"
-                iconSize={24}
-                iconColor={iconColorSearch}
+                name="search"
+                size={24}
+                color={iconColorSearch}
               />
             </FindInput>
 
@@ -145,10 +162,10 @@ function Findsites() {
                     onPress={() => {
                       navigateToMaps(`${item.latitude},${item.longitude}`);
                     }}
-                    iconColor={iconMap}
-                    iconSize={32}
+                    color={iconMap}
+                    size={32}
                     style={styles.goIcon}
-                    iconName="chevron-right"
+                    name="chevron-right"
                   />
                 </SiteCard>
               )}
