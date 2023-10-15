@@ -11,12 +11,11 @@ export const styles = StyleSheet.create({
   viewInput: {
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor: theme.COLORS.BACKGROUND,
+
     borderWidth: 1,
     borderColor: theme.COLORS.TITLE,
     height: 50,
     borderRadius: 7,
-    marginTop: 30,
   },
   magnifier: {
     paddingHorizontal: Platform.OS === 'ios' ? 15 : 11,
@@ -27,4 +26,4 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const iconColor = theme.COLORS.ICONCOLOR;
+export const iconColorSearch = theme.COLORS.ICONCOLOR;

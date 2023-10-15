@@ -22,9 +22,11 @@ const theme = {
     TITLE: '#322153',
     DESCRIPTION: '#6C6C80',
     ICONCOLOR: '#52c3a3',
+    ICONCOLOR_LIGHT: 'rgba(18, 164, 84, 0.3)',
+    GO: '#12A454',
     TEXTCOLOR: '#1F1E25',
-
-    GRADIENT: ['#B83341', '#E03F50'],
+    CARD_BACKGROUND: '#FFFFFF',
+    TEXT_CARD: '#969CB2',
   },
 
   FONTS: {
