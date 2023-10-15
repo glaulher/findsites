@@ -4,21 +4,15 @@ import Icon from 'react-native-vector-icons/Feather';
 
 interface Props extends TouchableOpacityProps {
   onPress: () => void;
-  iconName: string;
-  iconSize: number;
-  iconColor: string;
+  name: string;
+  size: number;
+  color: string;
 }
 
-function ButtonOpacity({
-  onPress,
-  iconName,
-  iconSize,
-  iconColor,
-  ...rest
-}: Props) {
+function ButtonOpacity({ onPress, name, size, color, ...rest }: Props) {
   return (
-    <TouchableOpacity onPress={onPress} {...rest}>
-      <Icon name={iconName} color={iconColor} size={iconSize} />
+    <TouchableOpacity testID="button-opacity" onPress={onPress} {...rest}>
+      <Icon testID="button-icon" name={name} color={color} size={size} />
     </TouchableOpacity>
   );
 }
