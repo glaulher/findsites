@@ -13,6 +13,7 @@ import {
   Alert,
   FlatList,
 } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
 import towerBackground from '@assets/home-background.png';
 
@@ -26,38 +27,43 @@ import {
   iconMap,
 } from '@components/ButtonOpacity/styles';
 
-import address from '@services/address.json';
 import { colorBackgroundImage, styles } from './styles';
 
+import { stateData } from '../../database';
+
+interface IpropsData {
+  id: number;
+  nome: string;
+  latitude: string;
+  longitude: string;
+  regional: string;
+  estado: string;
+  municipio: string;
+  tipo: string;
+  endereco: string;
+}
 function Findsites() {
   const insets = useSafeAreaInsets();
 
   const [searchName, setSearchName] = useState('');
-  const [addresses, setAddresses] = useState<
-    {
-      ID: number;
-      Nome: string;
-      latitude: string;
-      longitude: string;
-      cluster_geo?: string;
-      regional: string;
-      estado: string;
-      municipio: string;
-      Endereco: string;
-      TipoInfra?: string;
-      TipoSiteRf?: string;
-    }[]
-  >([]);
+  const [addresses, setAddresses] = useState<IpropsData[]>([]);
+  const [picker, setPicker] = useState('AC');
 
   const searchSite = async () => {
     try {
-      const findSite = address.find(site => site.Nome === searchName);
+      const selectSite = stateData[
+        picker as keyof typeof stateData
+      ] as Array<IpropsData>;
+
+      const findSite = await JSON.parse(JSON.stringify(selectSite)).find(
+        (site: IpropsData) => site.nome === searchName,
+      );
 
       if (!findSite) {
         Alert.alert('Oops...', `Site ${searchName} não encontrado!`);
         return setSearchName('');
       }
-      setAddresses([JSON.parse(JSON.stringify(findSite))]);
+      setAddresses([findSite]);
       return setSearchName('');
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -121,14 +127,22 @@ function Findsites() {
             <View style={styles.text}>
               <Text style={styles.title}>Bem vindo.</Text>
               <Text style={styles.description}>
-                Insira o Id do site{'\n'}para localizar o endereço.
+                Insira a região e o Id do site{'\n'}para localizar o endereço.
               </Text>
             </View>
 
+            <View style={styles.picker}>
+              <Picker selectedValue={picker} onValueChange={setPicker}>
+                {Object.keys(stateData).map(state => (
+                  <Picker.Item key={state} label={`${state}`} value={state} />
+                ))}
+              </Picker>
+            </View>
+
             <FindInput
-              testID="search-input"
               value={searchName}
               onChangeText={setSearchName}
+              placeholder="Digite o nome do site"
               onSubmitEditing={async () => {
                 searchSite();
               }}
@@ -148,19 +162,22 @@ function Findsites() {
               style={styles.list}
               showsVerticalScrollIndicator={false}
               data={addresses}
-              keyExtractor={item => item.ID.toString()}
+              keyExtractor={item => item.id.toString()}
               renderItem={({ item }) => (
                 <SiteCard
-                  site={item.Nome}
-                  address={item.Endereco}
+                  site={item.nome}
+                  address={item.endereco}
                   city={item.municipio}
                   region={item.regional}
-                  latitude={item.latitude}
-                  longitude={item.longitude}
+                  latitude={item.latitude.replace(',', '.')}
+                  longitude={item.longitude.replace(',', '.')}
                 >
                   <ButtonOpacity
                     onPress={() => {
-                      navigateToMaps(`${item.latitude},${item.longitude}`);
+                      navigateToMaps(
+                        `${item.latitude.replace(',', '.')},
+                        ${item.longitude.replace(',', '.')}`,
+                      );
                     }}
                     color={iconMap}
                     size={32}
