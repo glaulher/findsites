@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     borderColor: theme.COLORS.TITLE,
     height: 50,
     borderRadius: 7,
+    marginTop: 16,
   },
   magnifier: {
     paddingHorizontal: Platform.OS === 'ios' ? 15 : 11,

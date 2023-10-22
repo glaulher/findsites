@@ -42,6 +42,12 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.COLORS.ICONCOLOR_LIGHT,
     borderRadius: 32,
   },
+  picker: {
+    borderWidth: 1,
+    borderColor: theme.COLORS.TITLE,
+    height: 50,
+    borderRadius: 7,
+  },
 });
 
 export const colorBackgroundImage = theme.COLORS.BACKGROUND;

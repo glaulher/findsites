@@ -5,7 +5,11 @@ import { FindInput } from './index';
 describe('<FindInput/>', () => {
   it('check if show correctly search input id placeholder', () => {
     const { getByPlaceholderText } = render(
-      <FindInput onChangeText={jest.fn()} onSubmitEditing={jest.fn()}>
+      <FindInput
+        placeholder="Digite o nome do site"
+        onChangeText={jest.fn()}
+        onSubmitEditing={jest.fn()}
+      >
         <div />
       </FindInput>,
     );
@@ -18,6 +22,7 @@ describe('<FindInput/>', () => {
   it('check if catch the value', () => {
     const { getByTestId } = render(
       <FindInput
+        placeholder="Digite o nome do site"
         onChangeText={jest.fn()}
         onSubmitEditing={jest.fn()}
         value="RJTES01"
@@ -36,6 +41,7 @@ describe('<FindInput/>', () => {
 
     const { getByTestId } = render(
       <FindInput
+        placeholder="Digite o nome do site"
         onChangeText={jest.fn()}
         onSubmitEditing={onSubmitEditingMock}
         value="RJTES01"
@@ -57,6 +63,7 @@ describe('<FindInput/>', () => {
 
     const { getByTestId } = render(
       <FindInput
+        placeholder="Digite o nome do site"
         onChangeText={onChangeTextMock}
         onSubmitEditing={jest.fn()}
         value="RJTES01"
@@ -79,6 +86,7 @@ describe('<FindInput/>', () => {
   it('check if autoCapitalize is set correctly', () => {
     const { getByTestId } = render(
       <FindInput
+        placeholder="Digite o nome do site"
         onChangeText={jest.fn()}
         onSubmitEditing={jest.fn()}
         value="RJTES01"
