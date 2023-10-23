@@ -12,6 +12,7 @@ interface Props {
   longitude: string;
   region: string;
   city: string;
+  type: string;
 }
 
 export function SiteCard({
@@ -22,6 +23,7 @@ export function SiteCard({
   region,
   latitude,
   longitude,
+  type,
 }: Props) {
   return (
     <View style={styles.container}>
@@ -34,7 +36,10 @@ export function SiteCard({
       <Text style={styles.address}>{address}</Text>
       <View style={styles.city}>
         <Text style={styles.text}>{city}</Text>
-        <Text style={styles.text}>{region}</Text>
+        <View style={styles.cardWrapper}>
+          <Text style={styles.text}>{region}</Text>
+          <Text style={styles.text}>Infra: {type}</Text>
+        </View>
       </View>
       <View style={styles.footer}>
         <View style={styles.coordinates}>

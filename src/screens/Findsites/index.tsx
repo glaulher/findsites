@@ -171,6 +171,7 @@ function Findsites() {
                   region={item.regional}
                   latitude={item.latitude.replace(',', '.')}
                   longitude={item.longitude.replace(',', '.')}
+                  type={item.tipo}
                 >
                   <ButtonOpacity
                     onPress={() => {
