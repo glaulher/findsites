@@ -141,7 +141,7 @@ function Findsites() {
 
             <FindInput
               value={searchName}
-              onChangeText={setSearchName}
+              onChangeText={value => setSearchName(value.trim())}
               placeholder="Digite o nome do site"
               onSubmitEditing={async () => {
                 searchSite();
