@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
-import { Image, View } from 'react-native';
+import { Image, View, Text } from 'react-native';
 
-import logo from '@assets/logo.png';
+import tower from '@assets/tower.png';
 import { styles } from './styles';
 
 interface Props {
@@ -11,7 +11,10 @@ interface Props {
 export function Header({ children }: Props) {
   return (
     <View style={styles.header}>
-      <Image source={logo} testID="header-logo" />
+      <View style={styles.viewLogo}>
+        <Image source={tower} style={styles.tower} testID="header-logo" />
+        <Text style={styles.labelLogo}>Find {'\n  '}Sites</Text>
+      </View>
       {children}
     </View>
   );

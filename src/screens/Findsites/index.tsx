@@ -97,6 +97,7 @@ function Findsites() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <View
+        accessibilityLabel="initial screen"
         style={{
           flex: 1,
           padding: 24,
@@ -159,6 +160,7 @@ function Findsites() {
             </FindInput>
 
             <FlatList
+              accessibilityLabel="card address"
               style={styles.list}
               showsVerticalScrollIndicator={false}
               data={addresses}
