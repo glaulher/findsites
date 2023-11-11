@@ -1,87 +1,64 @@
 {
-    "env": {
-        "es2021": true
+  "env": {
+    "es2021": true
+},
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "standard",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-      "plugin:react/recommended",
-      "airbnb",
-      "airbnb/hooks",
-      "prettier",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:prettier/recommended"
-    ],
-    "globals": {
-        "__DEV__": "readonly"
-      },
-      "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "project": "./tsconfig.json",
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "react-hooks",
-        "@typescript-eslint",
-        "prettier"
-      ],
-      "rules": {
-        "arrow-body-style": "off",
-        "prefer-arrow-callback": "off",
-        "import/no-extraneous-dependencies": [
-          "error",
-          {
-            "devDependencies": true
-          }
-        ],
-        "react/jsx-props-no-spreading": "off",
-        "camelcase": "off",
-        "@typescript-eslint/no-empty-interface": "off",
-        "import/prefer-default-export": "off",
-        "prettier/prettier": "error",
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "react/jsx-filename-extension": [
-          1,
-          {
-            "extensions": [
-              ".tsx"
-            ]
-          }
-        ],
-        "import/extensions": [
-          "error",
-          "ignorePackages",
-          {
-            "ts": "never",
-            "tsx": "never"
-          }
-        ],
-        "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": [
-          "error",
-          {
-            "functions": true,
-            "classes": true,
-            "variables": false
-          }
-        ],
-        "react/react-in-jsx-scope": "off",
-        "react/function-component-definition": [
-          2,
-          {
-            "namedComponents": "function-declaration"
-          }
-        ]
-      },
-      "settings": {
-        "import/resolver": {
-          "typescript": {
-
-          }
-        },
-        "import/core-modules": [
-          "@expo/vector-icons"
-        ]
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "react/self-closing-comp": "error",
+    "prettier/prettier": ["error", {
+      "printWidth": 80,
+      "tabWidth": 2,
+      "singleQuote": true,
+      "trailingComma": "all",
+      "arrowParens": "always",
+      "semi": true,
+      "endOfLine": "auto"
+    }],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "jsx-a11y/alt-text": [
+      "warn",
+      {
+        "elements": ["img"],
+        "img": ["Image"]
       }
+    ],
+    "camelcase": "off",
+    "jsx-a11y/aria-props": "warn",
+    "jsx-a11y/aria-proptypes": "warn",
+    "jsx-a11y/aria-unsupported-elements": "warn",
+    "jsx-a11y/role-has-required-aria-props": "warn",
+    "jsx-a11y/role-supports-aria-props": "warn",
+    "react/no-unknown-property": "error"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "[require.resolve('@typescript-eslint/parser')]": [".ts", ".tsx", ".d.ts"]
     }
+  },
+  "ignorePatterns": [
+    "node_modules"
+  ]
+}

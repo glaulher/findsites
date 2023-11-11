@@ -2,7 +2,7 @@
   "expo": {
     "name": "FindSites",
     "slug": "findsites",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,7 +15,30 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "comgooglemaps",
+          "citymapper",
+          "uber",
+          "lyft",
+          "transit",
+          "truckmap",
+          "waze",
+          "yandexnavi",
+          "moovit",
+          "yandextaxi",
+          "yandexmaps",
+          "kakaomap",
+          "szn-mapy",
+          "mapsme",
+          "osmandmaps",
+          "gett",
+          "nmap",
+          "dgis",
+          "lftgpas"
+        ]
+     }
     },
     "android": {
       "adaptiveIcon": {
@@ -23,11 +46,12 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.glaulher.findsites",
-      "versionCode": 2
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "plugins": [ "./src/plugins/android-manifest.plugin.js"],
     "extra": {
       "eas": {
         "projectId": "110f32a7-0bfb-4dc4-b67e-69ee3acd2a0a"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { render } from '@testing-library/react-native';
-import Findsites from './index';
+import Findsites from './Findsites';
 
 describe('<Findsites>', () => {
   it('should render without errors', () => {
