@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable no-console */
+import React, { useState, useEffect } from 'react';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -9,11 +10,12 @@ import {
   Platform,
   Keyboard,
   TouchableWithoutFeedback,
-  Linking,
   Alert,
   FlatList,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import towerBackground from '@assets/home-background.png';
 
@@ -30,6 +32,7 @@ import {
 import { colorBackgroundImage, styles } from './styles';
 
 import { stateData } from '../../database';
+import { PopupGps } from '@components/PopupGps';
 
 interface IpropsData {
   id: number;
@@ -45,14 +48,18 @@ interface IpropsData {
 function Findsites() {
   const insets = useSafeAreaInsets();
 
+  const [isVisible, setIsVisible] = useState(false);
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+
   const [searchName, setSearchName] = useState('');
   const [addresses, setAddresses] = useState<IpropsData[]>([]);
-  const [picker, setPicker] = useState('AC');
+  const [selectedValue, setSelectedValue] = useState('AC');
 
   const searchSite = async () => {
     try {
       const selectSite = stateData[
-        picker as keyof typeof stateData
+        selectedValue as keyof typeof stateData
       ] as Array<IpropsData>;
 
       const findSite = await JSON.parse(JSON.stringify(selectSite)).find(
@@ -75,21 +82,40 @@ function Findsites() {
     }
   };
 
-  const navigateToMaps = (coordinates: string) => {
+  const navigateToMaps = (lat: string, long: string) => {
     setAddresses([]);
     try {
-      return Platform.OS === 'ios'
-        ? Linking.openURL(`maps://?q=${coordinates}`)
-        : Linking.openURL(`google.navigation:q=${coordinates}`);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Erro ao abrir o mapa:', error);
+      return [setLatitude(lat), setLongitude(long)];
+    } catch {
       return Alert.alert(
         'Erro',
-        'Não foi possível abrir o mapa. Por favor, verifique suas configurações de mapa e tente novamente.',
+        'Ocorreu um erro durante a busca. Por favor, tente novamente.',
       );
     }
   };
+
+  const onValueChange = async (value: string) => {
+    setSelectedValue(value);
+    try {
+      await AsyncStorage.setItem('FindSites:selectedValue', value);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    const loadSelectedState = async () => {
+      try {
+        const value = await AsyncStorage.getItem('FindSites:selectedValue');
+        if (value !== null) {
+          setSelectedValue(value);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    loadSelectedState();
+  }, []);
 
   return (
     <KeyboardAvoidingView
@@ -133,8 +159,11 @@ function Findsites() {
             </View>
 
             <View style={styles.picker}>
-              <Picker selectedValue={picker} onValueChange={setPicker}>
-                {Object.keys(stateData).map(state => (
+              <Picker
+                selectedValue={selectedValue}
+                onValueChange={onValueChange}
+              >
+                {Object.keys(stateData).map((state) => (
                   <Picker.Item key={state} label={`${state}`} value={state} />
                 ))}
               </Picker>
@@ -142,7 +171,7 @@ function Findsites() {
 
             <FindInput
               value={searchName}
-              onChangeText={value => setSearchName(value.trim())}
+              onChangeText={(value) => setSearchName(value.trim())}
               placeholder="Digite o nome do site"
               onSubmitEditing={async () => {
                 searchSite();
@@ -164,7 +193,7 @@ function Findsites() {
               style={styles.list}
               showsVerticalScrollIndicator={false}
               data={addresses}
-              keyExtractor={item => item.id.toString()}
+              keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
                 <SiteCard
                   site={item.nome}
@@ -178,9 +207,10 @@ function Findsites() {
                   <ButtonOpacity
                     onPress={() => {
                       navigateToMaps(
-                        `${item.latitude.replace(',', '.')},
-                        ${item.longitude.replace(',', '.')}`,
+                        `${item.latitude.replace(',', '.')}`,
+                        `${item.longitude.replace(',', '.')}`,
                       );
+                      return setIsVisible(true);
                     }}
                     color={iconMap}
                     size={32}
@@ -189,6 +219,17 @@ function Findsites() {
                   />
                 </SiteCard>
               )}
+            />
+
+            <PopupGps
+              isVisible={isVisible}
+              onCancelPressed={() => setIsVisible(false)}
+              onAppPressed={() => setIsVisible(false)}
+              onBackButtonPressed={() => setIsVisible(false)}
+              options={{
+                latitude,
+                longitude,
+              }}
             />
           </ImageBackground>
         </TouchableWithoutFeedback>
