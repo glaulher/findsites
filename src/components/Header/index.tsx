@@ -12,8 +12,13 @@ export function Header({ children }: Props) {
   return (
     <View style={styles.header}>
       <View style={styles.viewLogo}>
-        <Image source={tower} style={styles.tower} testID="header-logo" />
-        <Text style={styles.labelLogo}>Find {'\n  '}Sites</Text>
+        <Image
+          source={tower}
+          style={styles.tower}
+          testID="header-logo"
+          alt="Logo tower"
+        />
+        <Text style={styles.labelLogo}>Find {'\n  '}Site</Text>
       </View>
       {children}
     </View>

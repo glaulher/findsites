@@ -54,7 +54,7 @@ function Findsites() {
 
   const [searchName, setSearchName] = useState('');
   const [addresses, setAddresses] = useState<IpropsData[]>([]);
-  const [selectedValue, setSelectedValue] = useState('AC');
+  const [selectedValue, setSelectedValue] = useState('');
 
   const searchSite = async () => {
     try {
@@ -107,9 +107,10 @@ function Findsites() {
     const loadSelectedState = async () => {
       try {
         const value = await AsyncStorage.getItem('FindSites:selectedValue');
-        if (value !== null) {
-          setSelectedValue(value);
+        if (value === null) {
+          return setSelectedValue('AC');
         }
+        return setSelectedValue(value);
       } catch (e) {
         console.log(e);
       }

@@ -2,7 +2,7 @@
   "expo": {
     "name": "FindSites",
     "slug": "findsites",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -46,12 +46,20 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.glaulher.findsites",
-      "versionCode": 4
+      "versionCode": 5
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [ "./src/plugins/android-manifest.plugin.js"],
+    "plugins": [
+      "./src/plugins/android-manifest.plugin.js",
+      [
+        "expo-updates",
+        {
+          "username": "glaulher"
+        }
+      ]
+  ],
     "extra": {
       "eas": {
         "projectId": "110f32a7-0bfb-4dc4-b67e-69ee3acd2a0a"
