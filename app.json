@@ -38,7 +38,7 @@
           "dgis",
           "lftgpas"
         ]
-     }
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -46,7 +46,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.glaulher.findsites",
-      "versionCode": 5
+      "versionCode": 6
     },
     "web": {
       "favicon": "./assets/favicon.png"
