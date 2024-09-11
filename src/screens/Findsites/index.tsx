@@ -70,7 +70,12 @@ function Findsites() {
         Alert.alert('Oops...', `Site ${searchName} não encontrado!`);
         return setSearchName('');
       }
+      // confirms that latitude and longitude will be of type string
+      findSite.latitude = String(findSite.latitude);
+      findSite.longitude = String(findSite.longitude);
+
       setAddresses([findSite]);
+
       return setSearchName('');
     } catch (error) {
       // eslint-disable-next-line no-console
