@@ -2,7 +2,7 @@
   "expo": {
     "name": "FindSites",
     "slug": "findsites",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -46,7 +46,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.glaulher.findsites",
-      "versionCode": 11
+      "versionCode": 12
     },
     "web": {
       "favicon": "./assets/favicon.png"
