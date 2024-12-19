@@ -2,10 +2,11 @@
   "expo": {
     "name": "FindSites",
     "slug": "findsites",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -17,42 +18,51 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "LSApplicationQueriesSchemes": [
-          "comgooglemaps",
-          "citymapper",
-          "uber",
-          "lyft",
-          "transit",
-          "truckmap",
-          "waze",
-          "yandexnavi",
-          "moovit",
-          "yandextaxi",
-          "yandexmaps",
-          "kakaomap",
-          "szn-mapy",
-          "mapsme",
-          "osmandmaps",
-          "gett",
-          "nmap",
-          "dgis",
-          "lftgpas"
-        ]
+      "LSApplicationQueriesSchemes": [
+        "comgooglemaps",
+        "citymapper",
+        "uber",
+        "lyft",
+        "transit",
+        "truckmap",
+        "waze",
+        "yandexnavi",
+        "moovit",
+        "yandextaxi",
+        "yandexmaps",
+        "kakaomap",
+        "szn-mapy",
+        "mapsme",
+        "osmandmaps",
+        "gett",
+        "nmap",
+        "dgis",
+        "lftgpas"
+      ]
       }
     },
     "android": {
-        "adaptiveIcon": {
+      "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.glaulher.findsites",
-      "versionCode": 12
+      "versionCode": 13
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "./src/plugins/android-manifest.plugin.js",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/ubuntu/Ubuntu_700Bold.ttf",
+            "node_modules/@expo-google-fonts/roboto/Roboto_400Regular.ttf"
+          ]
+        }
+      ],
       [
         "expo-updates",
         {
@@ -64,6 +74,12 @@
       "eas": {
         "projectId": "110f32a7-0bfb-4dc4-b67e-69ee3acd2a0a"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/110f32a7-0bfb-4dc4-b67e-69ee3acd2a0a"
     }
   }
 }
