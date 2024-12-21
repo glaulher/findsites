@@ -71,8 +71,15 @@ function Findsites() {
         return setSearchName('');
       }
       // confirms that latitude and longitude will be of type string
-      findSite.latitude = String(findSite.latitude);
-      findSite.longitude = String(findSite.longitude);
+      findSite.latitude =
+        typeof findSite.latitude === 'string'
+          ? findSite.latitude
+          : String(findSite.latitude);
+
+      findSite.longitude =
+        typeof findSite.longitude === 'string'
+          ? findSite.longitude
+          : String(findSite.longitude);
 
       setAddresses([findSite]);
 
