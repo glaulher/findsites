@@ -2,7 +2,7 @@
   "expo": {
     "name": "findsites",
     "slug": "findsites",
-    "version": "1.0.0",
+    "version": "1.1.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f0f0f5"
     },
     "ios": {
       "supportsTablet": true
@@ -20,10 +20,41 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.glaulher.findsites",
+      "versionCode": 19
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "./src/plugins/android-manifest.plugin.js",
+      [
+        "expo-updates",
+        {
+          "username": "glaulher"
+        }
+      ],
+      [
+        "expo-asset",
+        {
+          "assets": [
+            "./assets/images"
+          ]
+        }
+      ],
+      [
+        "react-native-map-link"
+      ],
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "110f32a7-0bfb-4dc4-b67e-69ee3acd2a0a"
+      }
+    },
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
