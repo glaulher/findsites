@@ -15,6 +15,8 @@ interface Props {
   region: string;
   city: string;
   type: string;
+  copyLatitude: string;
+  copyLongitude: string;
 }
 
 export function SiteCard({
@@ -25,6 +27,8 @@ export function SiteCard({
   region,
   latitude,
   longitude,
+  copyLatitude,
+  copyLongitude,
   type,
 }: Props) {
   const copyToClipboard = (
@@ -43,7 +47,7 @@ export function SiteCard({
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() =>
-          copyToClipboard(address, city, region, latitude, longitude)
+          copyToClipboard(address, city, region, copyLatitude, copyLongitude)
         }
       >
         <View style={styles.cardWrapper}>

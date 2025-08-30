@@ -2,7 +2,7 @@
   "expo": {
     "name": "findsites",
     "slug": "findsites",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,7 +22,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.glaulher.findsites",
-      "versionCode": 19
+      "versionCode": 21
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -46,7 +46,31 @@
       [
         "react-native-map-link"
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "expo-sqlite",
+        {
+          "enableFTS": true,
+          "useSQLCipher": true,
+          "android": {
+            "enableFTS": false,
+            "useSQLCipher": false
+          },
+          "ios": {
+            "customBuildFlags": [
+              "-DSQLITE_ENABLE_DBSTAT_VTAB=1 -DSQLITE_ENABLE_SNAPSHOT=1"
+            ]
+          }
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24
+          }
+        }
+      ]
     ],
     "extra": {
       "eas": {

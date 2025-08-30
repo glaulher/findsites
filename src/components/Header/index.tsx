@@ -25,7 +25,7 @@ export function Header({ children }: Props) {
             testID="header-logo"
             alt="Logo tower"
           />
-          <Text style={styles.labelLogo}>Find {'\n  '}Site</Text>
+          <Text style={styles.labelLogo}>Find {'\n  '}Sites</Text>
         </View>
         {children}
       </View>

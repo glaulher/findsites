@@ -5,10 +5,7 @@ import theme from '@/constants/Theme';
 export const styles = StyleSheet.create({
   container: {},
   backgroundImage: {},
-  image: {
-    width: 500,
-    height: 500,
-  },
+  image: {},
 
   text: {
     paddingBottom: 16,
@@ -47,5 +44,3 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
   },
 });
-
-export const colorBackgroundImage = theme.COLORS.BACKGROUND;

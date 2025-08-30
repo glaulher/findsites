@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, View } from 'react-native';
 
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
@@ -13,8 +13,11 @@ import { Loading } from '@/components/Loading';
 import HomeFindsites from '@/app/HomeFindsites';
 
 import theme from '@/constants/Theme';
+import { getDatabase } from '@/database';
 
 export default function Index() {
+  const [dbReady, setDbReady] = useState(false);
+
   const [fontsLoaded] = useFonts({
     Ubuntu_700Bold,
     Roboto_400Regular,
@@ -22,6 +25,8 @@ export default function Index() {
 
   useEffect(() => {
     async function updateApp() {
+      await getDatabase();
+
       if (!__DEV__) {
         const { isAvailable } = await Updates.checkForUpdateAsync();
         if (isAvailable) {
@@ -30,12 +35,13 @@ export default function Index() {
         }
       }
     }
+    setDbReady(true);
     updateApp();
   }, []);
 
   return (
     <>
-      {fontsLoaded ? (
+      {fontsLoaded && dbReady ? (
         <>
           <View
             style={{

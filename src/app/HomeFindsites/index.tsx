@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import {
   Text,
@@ -8,8 +8,6 @@ import {
   Alert,
   FlatList,
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useAssets } from 'expo-asset';
 import { ImageBackground } from 'expo-image';
@@ -26,98 +24,24 @@ import {
 } from '@/components/ButtonOpacity/styles';
 
 import { styles } from './styles';
+import { useSiteSearch } from '@/hooks/useSiteSearch';
 
-import { stateData } from '@/database';
-
-interface IpropsData {
-  id: number;
-  nome: string;
-  latitude: string;
-  longitude: string;
-  regional: string;
-  estado: string;
-  municipio: string;
-  tipo: string;
-  endereco: string;
-}
 function HomeFindsites() {
   const [assets, error] = useAssets(
     require('../../../assets/home-background.png'),
   );
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
-
-  const [searchName, setSearchName] = useState('');
-  const [addresses, setAddresses] = useState<IpropsData[]>([]);
-  const [selectedValue, setSelectedValue] = useState('');
-
-  const searchSite = async () => {
-    try {
-      const selectSite = stateData[
-        selectedValue as keyof typeof stateData
-      ] as IpropsData[];
-
-      const findSite = await JSON.parse(JSON.stringify(selectSite)).find(
-        (site: IpropsData) => site.nome === searchName,
-      );
-
-      if (!findSite) {
-        Alert.alert('Oops...', `Site ${searchName} não encontrado!`);
-        return setSearchName('');
-      }
-      // confirms that latitude and longitude will be of type string
-      findSite.latitude = String(findSite.latitude);
-      findSite.longitude = String(findSite.longitude);
-
-      setAddresses([findSite]);
-
-      return setSearchName('');
-    } catch (error) {
-      console.error('Erro durante a pesquisa:', error);
-      return Alert.alert(
-        'Erro',
-        'Ocorreu um erro durante a pesquisa. Por favor, tente novamente.',
-      );
-    }
-  };
-
-  const navigateToMaps = (lat: string, long: string) => {
-    setAddresses([]);
-    try {
-      return [setLatitude(lat), setLongitude(long)];
-    } catch {
-      return Alert.alert(
-        'Erro',
-        'Ocorreu um erro durante a busca. Por favor, tente novamente.',
-      );
-    }
-  };
-
-  const onValueChange = async (value: string) => {
-    setSelectedValue(value);
-    try {
-      await AsyncStorage.setItem('FindSites:selectedValue', value);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    const loadSelectedState = async () => {
-      try {
-        const value = await AsyncStorage.getItem('FindSites:selectedValue');
-        if (value === null) {
-          return setSelectedValue('AC');
-        }
-        return setSelectedValue(value);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    loadSelectedState();
-  }, []);
+  const {
+    isVisible,
+    latitude,
+    longitude,
+    searchName,
+    addresses,
+    setSearchName,
+    searchSite,
+    handleNavigateToMaps,
+    setIsVisible,
+  } = useSiteSearch();
 
   if (!assets || error) {
     return;
@@ -161,18 +85,11 @@ function HomeFindsites() {
           <View style={styles.text}>
             <Text style={styles.title}>Bem vindo.</Text>
             <Text style={styles.description}>
-              Insira a região e o Id do site{'\n'}para localizar o endereço.
+              Insira o Id do site{'\n'}para localizar o endereço.
             </Text>
           </View>
         </TouchableWithoutFeedback>
 
-        <View style={styles.picker}>
-          <Picker selectedValue={selectedValue} onValueChange={onValueChange}>
-            {Object.keys(stateData).map((state) => (
-              <Picker.Item key={state} label={`${state}`} value={state} />
-            ))}
-          </Picker>
-        </View>
         <FindInput
           value={searchName}
           onChangeText={(value) => setSearchName(value.trim())}
@@ -203,13 +120,17 @@ function HomeFindsites() {
               address={item.endereco}
               city={item.municipio}
               region={item.regional}
-              latitude={item.latitude.replace(',', '.')}
-              longitude={item.longitude.replace(',', '.')}
+              latitude={parseFloat(item.latitude.replace(',', '.')).toFixed(4)}
+              longitude={parseFloat(item.longitude.replace(',', '.')).toFixed(
+                4,
+              )}
+              copyLatitude={item.latitude.replace(',', '.')}
+              copyLongitude={item.longitude.replace(',', '.')}
               type={item.tipo}
             >
               <ButtonOpacity
                 onPress={() => {
-                  navigateToMaps(
+                  handleNavigateToMaps(
                     `${item.latitude.replace(',', '.')}`,
                     `${item.longitude.replace(',', '.')}`,
                   );
