@@ -7,7 +7,7 @@ const config = getDefaultConfig(__dirname);
 
 module.exports = (async () => {
   const {
-    resolver: { sourceExts },
+    resolver: { sourceExts, assetExts },
   } = config;
 
   return {
@@ -15,6 +15,7 @@ module.exports = (async () => {
     resolver: {
       ...config.resolver,
       sourceExts: [...sourceExts, 'mjs', 'tsx', 'ts', 'js'],
+      assetExts: [...assetExts, 'db'],
     },
   };
 })();
