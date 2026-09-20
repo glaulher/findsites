@@ -20,7 +20,7 @@ export async function getDatabase(): Promise<SQLite.SQLiteDatabase> {
   const dbPath = `${FileSystem.documentDirectory}SQLite/${dbName}`;
   const versionFile = `${FileSystem.documentDirectory}SQLite/version.txt`;
 
-  const dbVersion = '1'; //ATUALIZAR ESSE VALOR AO MODIFICAR O BANCO
+  const dbVersion = '2'; //ATUALIZAR ESSE VALOR AO MODIFICAR O BANCO
 
   const storedVersion = await FileSystem.readAsStringAsync(versionFile).catch(
     () => null,
