@@ -28,3 +28,4 @@ export const styles = StyleSheet.create({
 });
 
 export const iconColorSearch = theme.COLORS.ICONCOLOR;
+export const placeholderColor = theme.COLORS.DESCRIPTION;

@@ -1,13 +1,14 @@
 import React, { ReactNode } from 'react';
 import { TextInput, TextInputProps, View } from 'react-native';
 
-import { styles } from './styles';
+import { placeholderColor, styles } from './styles';
 
 interface Props extends TextInputProps {
   onChangeText: (text: string) => void;
   onSubmitEditing: () => void;
   placeholder: string;
   children: ReactNode;
+  placeholderTextColor?: string;
 }
 
 export function FindInput({
@@ -15,6 +16,7 @@ export function FindInput({
   value,
   onSubmitEditing,
   placeholder,
+  placeholderTextColor = placeholderColor,
   children,
   ...restOnChange
 }: Props) {
@@ -25,6 +27,7 @@ export function FindInput({
         style={styles.input}
         autoCapitalize="characters"
         placeholder={placeholder}
+        placeholderTextColor={placeholderTextColor}
         onSubmitEditing={onSubmitEditing}
         value={value}
         onChangeText={onChangeText}

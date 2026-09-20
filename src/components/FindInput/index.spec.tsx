@@ -101,4 +101,20 @@ describe('<FindInput/>', () => {
     // Verify autoCapitalize
     expect(inputSearch.props.autoCapitalize).toBe('characters');
   });
+
+  it('check if placeholderTextColor is set correctly', () => {
+    const { getByPlaceholderText } = render(
+      <FindInput
+        placeholder="Digite o nome do site"
+        onChangeText={jest.fn()}
+        onSubmitEditing={jest.fn()}
+      >
+        <div />
+      </FindInput>,
+    );
+
+    const input = getByPlaceholderText('Digite o nome do site');
+    expect(input.props.placeholderTextColor).toBeDefined();
+    expect(input.props.placeholderTextColor).not.toBe('#FFFFFF');
+  });
 });
