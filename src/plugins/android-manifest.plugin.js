@@ -1,13 +1,13 @@
-const {withAndroidManifest} = require('@expo/config-plugins');
+const { withAndroidManifest } = require('@expo/config-plugins');
 
 const supportedApps = ['geo', 'waze'];
 const mapAppIntents = supportedApps.map((app) => {
   return {
     action: {
-      $: {'android:name': 'android.intent.action.VIEW'},
+      $: { 'android:name': 'android.intent.action.VIEW' },
     },
     data: {
-      $: {'android:scheme': app},
+      $: { 'android:scheme': app },
     },
   };
 });

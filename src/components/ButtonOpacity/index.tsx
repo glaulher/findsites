@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import { Feather } from '@expo/vector-icons';
+
+type FeatherIconName = ComponentProps<typeof Feather>['name'];
 
 interface Props extends TouchableOpacityProps {
   onPress: () => void;
-  name: string;
+  name: FeatherIconName;
   size: number;
   color: string;
 }
@@ -12,7 +14,7 @@ interface Props extends TouchableOpacityProps {
 function ButtonOpacity({ onPress, name, size, color, ...rest }: Props) {
   return (
     <TouchableOpacity testID="button-opacity" onPress={onPress} {...rest}>
-      <Icon testID="button-icon" name={name} color={color} size={size} />
+      <Feather testID="button-icon" name={name} color={color} size={size} />
     </TouchableOpacity>
   );
 }

@@ -1,4 +1,4 @@
-import theme from '@theme/index';
+import theme from '@/constants/Theme';
 
 export const iconColorSearch = theme.COLORS.ICONCOLOR;
 export const iconColorInfo = theme.COLORS.ICONCOLOR;

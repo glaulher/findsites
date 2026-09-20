@@ -1,16 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-import theme from '@theme/index';
+import theme from '@/constants/Theme';
 
 export const styles = StyleSheet.create({
   container: {},
-  backgroundImage: {
-    flex: 1,
-  },
-  image: {
-    width: 500,
-    height: 500,
-  },
+  backgroundImage: {},
+  image: {},
 
   text: {
     paddingBottom: 16,
@@ -49,5 +44,3 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
   },
 });
-
-export const colorBackgroundImage = theme.COLORS.BACKGROUND;

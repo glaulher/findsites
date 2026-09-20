@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
-import theme from '@theme/index';
+import Theme from '@/constants/Theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.COLORS.BACKGROUND,
+    backgroundColor: Theme.COLORS.BACKGROUND,
   },
 });
 export const LoadingIndicator = {
-  color: theme.COLORS.PRIMARY_800,
+  color: Theme.COLORS.PRIMARY_800,
 };

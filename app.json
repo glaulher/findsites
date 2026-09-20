@@ -1,52 +1,28 @@
 {
   "expo": {
-    "name": "FindSites",
+    "name": "findsites",
     "slug": "findsites",
-    "version": "1.0.8",
+    "version": "1.1.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#f0f0f5"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "LSApplicationQueriesSchemes": [
-          "comgooglemaps",
-          "citymapper",
-          "uber",
-          "lyft",
-          "transit",
-          "truckmap",
-          "waze",
-          "yandexnavi",
-          "moovit",
-          "yandextaxi",
-          "yandexmaps",
-          "kakaomap",
-          "szn-mapy",
-          "mapsme",
-          "osmandmaps",
-          "gett",
-          "nmap",
-          "dgis",
-          "lftgpas"
-        ]
-      }
+      "supportsTablet": true
     },
     "android": {
-        "adaptiveIcon": {
+      "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "edgeToEdgeEnabled": true,
       "package": "com.glaulher.findsites",
-      "versionCode": 13
+      "versionCode": 23
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -58,12 +34,54 @@
         {
           "username": "glaulher"
         }
+      ],
+      [
+        "expo-asset",
+        {
+          "assets": [
+            "./assets/images"
+          ]
+        }
+      ],
+      [
+        "react-native-map-link"
+      ],
+      "expo-font",
+      [
+        "expo-sqlite",
+        {
+          "enableFTS": true,
+          "useSQLCipher": true,
+          "android": {
+            "enableFTS": false,
+            "useSQLCipher": false
+          },
+          "ios": {
+            "customBuildFlags": [
+              "-DSQLITE_ENABLE_DBSTAT_VTAB=1 -DSQLITE_ENABLE_SNAPSHOT=1"
+            ]
+          }
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24,
+            "compileSdkVersion": 36,
+            "targetSdkVersion": 36,
+            "buildToolsVersion": "36.0.0"
+          }
+        }
       ]
     ],
     "extra": {
       "eas": {
         "projectId": "110f32a7-0bfb-4dc4-b67e-69ee3acd2a0a"
       }
+    },
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }

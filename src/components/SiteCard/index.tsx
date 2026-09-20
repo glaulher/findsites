@@ -3,7 +3,7 @@ import { View, Text, Alert, TouchableOpacity } from 'react-native';
 
 import * as Clipboard from 'expo-clipboard';
 
-import Icon from 'react-native-vector-icons/Feather';
+import { Feather } from '@expo/vector-icons';
 import { iconMap, styles } from './styles';
 
 interface Props {
@@ -15,6 +15,8 @@ interface Props {
   region: string;
   city: string;
   type: string;
+  copyLatitude: string;
+  copyLongitude: string;
 }
 
 export function SiteCard({
@@ -25,6 +27,8 @@ export function SiteCard({
   region,
   latitude,
   longitude,
+  copyLatitude,
+  copyLongitude,
   type,
 }: Props) {
   const copyToClipboard = (
@@ -43,7 +47,7 @@ export function SiteCard({
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() =>
-          copyToClipboard(address, city, region, latitude, longitude)
+          copyToClipboard(address, city, region, copyLatitude, copyLongitude)
         }
       >
         <View style={styles.cardWrapper}>
@@ -62,11 +66,11 @@ export function SiteCard({
         </View>
         <View style={styles.footer}>
           <View style={styles.coordinates}>
-            <Icon color={iconMap} name="map-pin" />
+            <Feather color={iconMap} name="map-pin" />
             <Text style={styles.latitude}>latitude:{latitude}</Text>
           </View>
           <View style={styles.coordinates}>
-            <Icon color={iconMap} name="map-pin" />
+            <Feather color={iconMap} name="map-pin" />
             <Text style={styles.longitude}>longitude:{longitude}</Text>
           </View>
         </View>
